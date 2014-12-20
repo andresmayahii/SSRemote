@@ -1,4 +1,4 @@
-package com.itkloud.ssremote.apis;
+package com.itkloud.ssremote;
 
 import com.itkloud.ssremote.dto.Account;
 
@@ -25,12 +25,12 @@ public class ApisAccounts {
     }
 
 
-    public Account getPusherAccount() {
+    public static Account getPusherAccount() {
         int index = (int) (Math.random() * pusherList.size());
         return pusherList.get(index);
     }
 
-    public Account getSlideShareAccount() {
+    public static Account getSlideShareAccount() {
         int index = (int) (Math.random() * slideShareList.size());
         return slideShareList.get(index);
     }

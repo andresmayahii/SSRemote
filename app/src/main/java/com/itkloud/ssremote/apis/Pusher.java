@@ -1,5 +1,7 @@
 package com.itkloud.ssremote.apis;
 
+import com.itkloud.ssremote.dto.Account;
+
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.InvalidKeyException;
@@ -28,9 +30,13 @@ public class Pusher {
     private final String secret;
     private final HttpClient httpclient;
 
+    public Pusher(Account account) {
+        this(account.getApp(),account.getUser(),account.getPassword());
+    }
+
     public Pusher(String appId, String key, String secret) {
         super();
-        httpclient = new DefaultHttpClient();
+        httpclient = new DefaultHttpClient(); //TODO manejar el nuevo cliente http de android
         this.appId = appId;
         this.key = key;
         this.secret = secret;
@@ -65,7 +71,7 @@ public class Pusher {
         HttpResponse response =  httpclient.execute(httppost);
 
         if(response.getStatusLine().getStatusCode() == SUCCESS_STATUS_CODE)  return true;
-        EntityUtils.toString(response.getEntity());
+        EntityUtils.toString(response.getEntity()); //TODO posiblemente esto no se esta ejecutando nunca
         return false;
     }
 
