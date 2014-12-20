@@ -22,6 +22,10 @@ public class ListActivity extends Activity {
         return true;
     }
 
+    public void testEnviar() {
+        
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
