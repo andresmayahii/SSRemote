@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.itkloud.ssremote.config.CF;
 import com.itkloud.ssremote.dto.Account;
+import com.itkloud.ssremote.dto.ItemData;
 import com.itkloud.ssremote.dto.ResultItems;
+import com.itkloud.ssremote.parser.SlideShareParse;
 import com.itkloud.ssremote.utils.HttpUtils;
 
 import org.apache.http.HttpResponse;
@@ -80,8 +82,20 @@ public class SlideShare {
         HttpPost httpPost = new HttpPost(ssUrl);
         try {
             HttpResponse response = httpclient.execute(httpPost);
+            ResultItems ri = SlideShareParse.parse(response.getEntity().getContent(),type);
+
+            Log.d(TAG,"Nombre:" + ri.getName());
+            Log.d(TAG,"Cantidad:" + ri.getCount());
+
+            for(ItemData item: ri.getItems()) {
+                Log.d(TAG,"Nombre Slide:" + item.getTitle());
+                Log.d(TAG,"Thumbnail:" + item.getThumbnail());
+                Log.d(TAG,"Doc:" + item.getDoc());
+            }
+
+            /*
             String body = EntityUtils.toString(response.getEntity());
-            Log.d(TAG,body);
+            Log.d(TAG,body);*/
         } catch(Exception e) {
             Log.e(TAG,"error",e);
         }
